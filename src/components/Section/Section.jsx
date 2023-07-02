@@ -10,54 +10,6 @@ export class Section extends Component {
     bad: 0,
   };
 
-  onLeaveFeedback = e => {
-    console.log(e);
-    switch (e.target.name) {
-      case 'good':
-        this.setState(prevState => {
-          return { good: (prevState.good += 1) };
-        });
-        break;
-      case 'neutral':
-        this.setState(prevState => {
-          return { neutral: (prevState.neutral += 1) };
-        });
-        break;
-      case 'bad':
-        this.setState(prevState => {
-          return { bad: (prevState.bad += 1) };
-        });
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  addFeedback = e => {
-    console.log(e.target.name);
-    switch (e.target.name) {
-      case 'good':
-        this.setState(prevState => {
-          return { good: (prevState.good += 1) };
-        });
-        break;
-      case 'neutral':
-        this.setState(prevState => {
-          return { neutral: (prevState.neutral += 1) };
-        });
-        break;
-      case 'bad':
-        this.setState(prevState => {
-          return { bad: (prevState.bad += 1) };
-        });
-        break;
-
-      default:
-        break;
-    }
-  };
-
   countTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
@@ -67,11 +19,14 @@ export class Section extends Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
       <>
         <FeedbackOptions
-          options={this.state}
-          onLeaveFeedback={this.addFeedback()}
+          options={{ good, neutral, bad }}
+          onLeaveFeedback={state => {
+            this.setState(state);
+          }}
         />
         {this.countTotalFeedback() === 0 ? (
           <Notification />
