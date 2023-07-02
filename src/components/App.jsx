@@ -1,8 +1,10 @@
+import { Section } from './Section/Section';
+
 export const App = () => {
   return (
+    <>
     <div
       style={{
-        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -12,5 +14,7 @@ export const App = () => {
     >
       React homework template
     </div>
+    <Section title="Please leave feedback"></Section>
+    </>
   );
 };
