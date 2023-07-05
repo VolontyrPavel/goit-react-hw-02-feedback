@@ -11,6 +11,14 @@ export class App extends Component {
     bad: 0,
   };
 
+  onLeaveFeedback = (option) => {
+    this.setState((prevState) => {
+      return {
+        [option]: prevState[option] + 1,
+      };
+  }); 
+  };
+
   countTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
@@ -20,15 +28,14 @@ export class App extends Component {
   };
 
   render() {
-    const { good, neutral, bad } = this.state;
+    console.log(Object.keys(this.state));
+    const options = Object.keys(this.state);
     return (
       <>
         <Section title={'Please leave feetback'}>
           <FeedbackOptions
-            options={{ good, neutral, bad }}
-            onLeaveFeedback={state => {
-              this.setState(state);
-            }}
+            options={options}
+            onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
 
